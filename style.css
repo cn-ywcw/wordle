@@ -1,0 +1,462 @@
+/* ============================================================
+   CSS 变量 & 全局重置
+   ============================================================ */
+:root {
+  /* 背景 */
+  --bg-start: #1a1a2e;
+  --bg-mid: #16213e;
+  --bg-end: #0f3460;
+
+  /* 颜色状态 */
+  --color-correct: #538d4e;
+  --color-present: #b59f3b;
+  --color-absent: #3a3a3c;
+
+  /* 键盘 */
+  --key-bg: rgba(255, 255, 255, 0.12);
+  --key-hover: rgba(255, 255, 255, 0.2);
+  --key-enter-bg: rgba(34, 197, 94, 0.3);
+  --key-enter-hover: rgba(34, 197, 94, 0.5);
+
+  /* 消息 */
+  --msg-error-bg: rgba(239, 68, 68, 0.2);
+  --msg-error-text: #fca5a5;
+  --msg-error-border: rgba(239, 68, 68, 0.3);
+  --msg-success-bg: rgba(34, 197, 94, 0.2);
+  --msg-success-text: #86efac;
+  --msg-success-border: rgba(34, 197, 94, 0.3);
+  --msg-info-bg: rgba(59, 130, 246, 0.2);
+  --msg-info-text: #93c5fd;
+  --msg-info-border: rgba(59, 130, 246, 0.3);
+
+  /* 弹窗 */
+  --modal-bg-start: #1e293b;
+  --modal-bg-end: #334155;
+  --modal-win: #4ade80;
+  --modal-lose: #f87171;
+  --modal-answer-color: #fbbf24;
+  --modal-btn-start: #f7971e;
+  --modal-btn-end: #ffd200;
+
+  /* 尺寸 */
+  --cell-size: 62px;
+  --cell-font: 28px;
+  --key-width: 40px;
+  --key-height: 52px;
+  --key-font: 14px;
+  --gap: 6px;
+
+  /* 边框 */
+  --border-empty: rgba(255, 255, 255, 0.2);
+  --border-filled: rgba(255, 255, 255, 0.4);
+  --border-active: rgba(255, 255, 255, 0.6);
+  --cell-bg: rgba(255, 255, 255, 0.05);
+  --cell-bg-filled: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, var(--bg-start), var(--bg-mid) 50%, var(--bg-end));
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  user-select: none;
+}
+
+/* ============================================================
+   布局容器
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: 520px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ============================================================
+   顶部标题栏
+   ============================================================ */
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  background: linear-gradient(90deg, var(--modal-btn-start), var(--modal-btn-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.attempts {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.btn-restart {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 20px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-restart:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.btn-restart:active {
+  transform: scale(0.95);
+}
+
+/* ============================================================
+   消息提示
+   ============================================================ */
+.message {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.message.show {
+  opacity: 1;
+}
+
+.message.error {
+  background: var(--msg-error-bg);
+  color: var(--msg-error-text);
+  border: 1px solid var(--msg-error-border);
+}
+
+.message.success {
+  background: var(--msg-success-bg);
+  color: var(--msg-success-text);
+  border: 1px solid var(--msg-success-border);
+}
+
+.message.info {
+  background: var(--msg-info-bg);
+  color: var(--msg-info-text);
+  border: 1px solid var(--msg-info-border);
+}
+
+/* ============================================================
+   猜词网格
+   ============================================================ */
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  padding: 10px 0;
+}
+
+.grid-row {
+  display: flex;
+  gap: var(--gap);
+}
+
+.grid-cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: 2px solid var(--border-empty);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--cell-font);
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--cell-bg);
+  transition: all 0.3s ease;
+}
+
+.grid-cell.filled {
+  border-color: var(--border-filled);
+  background: var(--cell-bg-filled);
+  animation: pop 0.15s ease;
+}
+
+.grid-cell.flip {
+  animation: flip 0.5s ease forwards;
+}
+
+.grid-cell.flip-delay-1 { animation-delay: 0.1s; }
+.grid-cell.flip-delay-2 { animation-delay: 0.2s; }
+.grid-cell.flip-delay-3 { animation-delay: 0.3s; }
+.grid-cell.flip-delay-4 { animation-delay: 0.4s; }
+
+.grid-cell.correct {
+  background: var(--color-correct);
+  border-color: var(--color-correct);
+  color: #fff;
+}
+
+.grid-cell.present {
+  background: var(--color-present);
+  border-color: var(--color-present);
+  color: #fff;
+}
+
+.grid-cell.absent {
+  background: var(--color-absent);
+  border-color: var(--color-absent);
+  color: #fff;
+}
+
+.grid-cell.shake {
+  animation: shake 0.4s ease;
+}
+
+/* ============================================================
+   QWERTY 键盘
+   ============================================================ */
+.keyboard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  padding: 10px 0;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.key {
+  width: var(--key-width);
+  height: var(--key-height);
+  border: none;
+  border-radius: 6px;
+  font-size: var(--key-font);
+  font-weight: 700;
+  background: var(--key-bg);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.key:hover {
+  background: var(--key-hover);
+  transform: translateY(-1px);
+}
+
+.key:active {
+  transform: translateY(1px);
+}
+
+.key-wide {
+  width: 60px;
+  font-size: 12px;
+}
+
+.key-enter {
+  width: 70px;
+  font-size: 11px;
+  background: var(--key-enter-bg);
+}
+
+.key-enter:hover {
+  background: var(--key-enter-hover);
+}
+
+.key-backspace {
+  width: 55px;
+  font-size: 18px;
+}
+
+/* 键盘颜色状态 */
+.key.correct {
+  background: var(--color-correct);
+  color: #fff;
+}
+
+.key.present {
+  background: var(--color-present);
+  color: #fff;
+}
+
+.key.absent {
+  background: var(--color-absent);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ============================================================
+   游戏结束弹窗
+   ============================================================ */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+.modal {
+  background: linear-gradient(135deg, var(--modal-bg-start), var(--modal-bg-end));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  animation: slideUp 0.4s ease;
+}
+
+.modal-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.modal-title.win  { color: var(--modal-win); }
+.modal-title.lose { color: var(--modal-lose); }
+
+.modal-answer {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  margin: 20px 0;
+  color: var(--modal-answer-color);
+}
+
+.modal-btn {
+  margin-top: 20px;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--modal-btn-start), var(--modal-btn-end));
+  color: var(--bg-start);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(247, 151, 30, 0.4);
+}
+
+/* ============================================================
+   动画关键帧
+   ============================================================ */
+@keyframes pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+@keyframes flip {
+  0%   { transform: rotateX(0deg); }
+  50%  { transform: rotateX(90deg); }
+  100% { transform: rotateX(0deg); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   响应式设计
+   ============================================================ */
+@media (max-width: 480px) {
+  :root {
+    --cell-size: 52px;
+    --cell-font: 22px;
+    --key-width: 32px;
+    --key-height: 46px;
+    --key-font: 12px;
+  }
+
+  .container { padding: 12px; gap: 14px; }
+  .title { font-size: 24px; letter-spacing: 3px; }
+  .key-wide { width: 48px; font-size: 10px; }
+  .key-enter { width: 56px; }
+  .key-backspace { width: 44px; }
+  .modal { padding: 28px; }
+  .modal-answer { font-size: 28px; }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --cell-size: 44px;
+    --cell-font: 18px;
+    --key-width: 28px;
+    --key-height: 40px;
+    --key-font: 10px;
+  }
+
+  .key-wide { width: 40px; }
+  .key-enter { width: 48px; }
+  .key-backspace { width: 38px; }
+}
