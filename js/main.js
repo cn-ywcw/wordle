@@ -29,13 +29,14 @@
   beginGame();
 
   function beginGame() {
-    W.startNewGame(gameState);
-    console.log('  本轮答案:', gameState.answer);
-    W.hideMessage();
-    W.hideModal();
-    W.updateAttempts(W.MAX_ATTEMPTS);
-    W.renderKeyboard();
-  }
+  W.startNewGame(gameState);
+  W.clearKeyboard(gameState);  // 添加这一行：清空键盘显示
+  console.log('  本轮答案:', gameState.answer);
+  W.hideMessage();
+  W.hideModal();
+  W.updateAttempts(W.MAX_ATTEMPTS);
+  W.renderKeyboard();
+}
 
   // ========== 事件绑定 ==========
   function bindEvents() {
