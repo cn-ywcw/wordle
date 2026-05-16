@@ -36,6 +36,11 @@ window.Wordle = window.Wordle || {};
     return state.answer;
   };
 
+  // ========== 清空键盘显示 ==========
+  W.clearKeyboard = function (state) {
+    state.keyboardState = {};
+  };
+
   // ========== 单词验证 ==========
   W.isValidWord = function (state, word) {
     return state.allowed.has(word.toLowerCase());
