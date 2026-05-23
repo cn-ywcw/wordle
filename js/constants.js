@@ -12,7 +12,7 @@ Wordle.WORD_LENGTH = 5;
 Wordle.KEYBOARD_ROWS = [
   ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
   ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-  ['enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'backspace'],
+  ['z', 'x', 'c', 'v', 'b', 'n', 'm', 'enter', 'backspace'],
 ];
 
 Wordle.KEY_LABELS = {
