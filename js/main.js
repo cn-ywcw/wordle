@@ -30,7 +30,8 @@
 
   function beginGame() {
   W.startNewGame(gameState);
-  W.clearKeyboard(gameState);  // 添加这一行：清空键盘显示
+  W.clearKeyboard(gameState);
+  W.renderGrid();
   console.log('  本轮答案:', gameState.answer);
   W.hideMessage();
   W.hideModal();
