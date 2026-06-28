@@ -12,17 +12,19 @@ Wordle.WORD_LENGTH = 5;
 Wordle.KEYBOARD_ROWS = [
   ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
   ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-  ['z', 'x', 'c', 'v', 'b', 'n', 'm', 'enter', 'backspace'],
+  ['z', 'x', 'c', 'v', 'b', 'n', 'm', 'enter', 'backspace', 'help'],
 ];
 
 Wordle.KEY_LABELS = {
   enter: '↵ ENTER',
   backspace: '⌫',
+  help: '?',
 };
 
 Wordle.KEY_CLASSES = {
   enter: 'key-wide key-enter',
   backspace: 'key-wide key-backspace',
+  help: 'key-wide key-help',
 };
 
 Wordle.STATE_CLASS = {

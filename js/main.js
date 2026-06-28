@@ -66,10 +66,23 @@
     // 重新开始按钮
     els.btnRestart.addEventListener('click', beginGame);
     els.modalRestart.addEventListener('click', beginGame);
+
+    // 帮助弹窗关闭
+    els.helpClose.addEventListener('click', function () {
+      W.hideHelp();
+    });
+    els.helpOverlay.addEventListener('click', function (e) {
+      if (e.target === els.helpOverlay) W.hideHelp();
+    });
   }
 
   // ========== 按键处理 ==========
   function processKey(key) {
+    if (key === 'help') {
+      W.showHelp();
+      return;
+    }
+
     if (gameState.isGameOver || gameState.isProcessing) return;
 
     if (key === 'enter') {
