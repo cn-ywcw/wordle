@@ -5,7 +5,7 @@
 // ============================================================
 window.Wordle = window.Wordle || {};
 
-Wordle.MAX_ATTEMPTS = 5;
+Wordle.MAX_ATTEMPTS = 6;
 Wordle.WORD_LENGTH = 5;
 
 // QWERTY 键盘布局
