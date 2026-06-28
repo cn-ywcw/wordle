@@ -22,6 +22,8 @@ window.Wordle = window.Wordle || {};
       modalTitle: document.getElementById('modalTitle'),
       modalAnswer: document.getElementById('modalAnswer'),
       modalRestart: document.getElementById('modalRestart'),
+      helpOverlay: document.getElementById('helpOverlay'),
+      helpClose: document.getElementById('helpClose'),
     };
   };
 
@@ -98,7 +100,7 @@ window.Wordle = window.Wordle || {};
     const keys = els.keyboard.querySelectorAll('.key');
     for (const key of keys) {
       const letter = key.dataset.key;
-      if (letter === 'enter' || letter === 'backspace') continue;
+      if (letter === 'enter' || letter === 'backspace' || letter === 'help') continue;
       key.className = 'key';
       const state = keyboardState[letter];
       if (state) key.classList.add(state);
@@ -154,5 +156,14 @@ window.Wordle = window.Wordle || {};
 
   W.hideModal = function () {
     els.modalOverlay.classList.remove('show');
+  };
+
+  // ========== 帮助弹窗 ==========
+  W.showHelp = function () {
+    els.helpOverlay.classList.add('show');
+  };
+
+  W.hideHelp = function () {
+    els.helpOverlay.classList.remove('show');
   };
 })(Wordle);

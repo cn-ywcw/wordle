@@ -34,6 +34,33 @@
         <button class="btn-restart modal-btn" id="modalRestart">再来一局</button>
       </div>
     </div>
+
+    <!-- 游戏说明弹窗 -->
+    <div class="modal-overlay" id="helpOverlay">
+      <div class="modal help-modal" id="helpModal">
+        <h2 class="modal-title">游戏说明</h2>
+        <div class="help-content">
+          <p>猜一个由 <strong>5 个字母</strong> 组成的英文单词</p>
+          <p>每次猜测后，字母格会变色提示：</p>
+          <div class="help-legend">
+            <div class="help-legend-item">
+              <span class="help-swatch correct">G</span>
+              <span>绿色 — 字母正确且位置正确</span>
+            </div>
+            <div class="help-legend-item">
+              <span class="help-swatch present">Y</span>
+              <span>黄色 — 字母存在于答案中，但位置不对</span>
+            </div>
+            <div class="help-legend-item">
+              <span class="help-swatch absent">X</span>
+              <span>灰色 — 字母不存在于答案中</span>
+            </div>
+          </div>
+          <p>共有 <strong>6 次</strong> 尝试机会</p>
+        </div>
+        <button class="btn-restart modal-btn" id="helpClose">知道了</button>
+      </div>
+    </div>
   </div>
 
   <!-- 数据文件（全局变量） -->
